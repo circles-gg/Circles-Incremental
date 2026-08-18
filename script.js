@@ -10,3 +10,5 @@ function earnCircles() {
 circles += circlesPerClick
 updateCircles()
 }
+
+updateCircles()
