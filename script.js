@@ -20,6 +20,7 @@ function moreCircles() {
         circlesPerClick += 1
         moreCirclesCost *= 2
         updateCircles()
+        saveGame()
     }
 }
 
@@ -31,8 +32,8 @@ localStorage.setItem("moreCirclesCost", moreCirclesCost)
 
 function loadGame() {
 circles = Number(localStorage.getItem("circles")) || 0
-Number(localStorage.getItem("circlesPerClick")) || 1
-Number(localStorage.getItem("moreCirclesCost")) || 5
+circlesPerClick = Number(localStorage.getItem("circlesPerClick")) || 1
+moreCirclesCost = Number(localStorage.getItem("moreCirclesCost")) || 5
 updateCircles()
 }
 
