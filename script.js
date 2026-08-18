@@ -1,6 +1,7 @@
 let circles = 0
 let circlesPerClick = 1
 let circlesPerSecond = 0
+let moreCirclesCost = 50
 
 function updateCircles() {
     document.getElementById("circles").textContent = circles
