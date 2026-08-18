@@ -13,12 +13,14 @@ function earnCircles() {
 }
 
 function saveGame() {
-    localStorage.setItem("circles", circles)
+localStorage.setItem("circles", circles)
+localStorage.setItem("circlesPerClick", circlesPerClick)
 }
 
 function loadGame() {
-    circles = Number(localStorage.getItem("circles")) || 0
-    updateCircles()
+circles = Number(localStorage.getItem("circles")) || 0
+Number(localStorage.getItem("circlesPerClick")) || 1
+updateCircles()
 }
 
 loadGame()
