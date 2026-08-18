@@ -56,7 +56,7 @@ localStorage.setItem("circles", circles)
     localStorage.setItem("circlesPerClick", circlesPerClick)
     localStorage.setItem("evenMoreCirclesCost", evenMoreCirclesCost)
 
-localStorage.setItem("moreCirclesCostMulti", moreCirclesCostMulti)
+localStorage.setItem("evenMoreCirclesMulti", evenMoreCirclesMulti)
 
 localStorage.setItem("moreCirclesCost", moreCirclesCost)
  localStorage.setItem("circlesShopUnlocked", circlesShopUnlocked)
