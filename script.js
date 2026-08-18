@@ -10,9 +10,9 @@ let circlesShopUnlocked = false
 function updateCircles() {
     document.getElementById("circles").textContent = circles
     document.getElementById("moreCirclesCost").textContent = moreCirclesCost
-}
 
 document.getElementById("evenMoreCirclesCost").textContent = evenMoreCirclesCost
+}
 
 function earnCircles() {
     circles += circlesPerClick * evenMoreCirclesMulti
