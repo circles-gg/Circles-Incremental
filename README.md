@@ -1,2 +1,2 @@
 # Circles-Incremental
-An incremental web game made by CirclesNET.
+An **incremental web game** made by **CirclesNET**.
