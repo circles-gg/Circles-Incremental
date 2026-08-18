@@ -8,8 +8,9 @@ let evenMoreCirclesMulti = 1
 let circlesShopUnlocked = false
 
 function updateCircles() {
-    document.getElementById("circles").textContent = circles
-    document.getElementById("moreCirclesCost").textContent = moreCirclesCost
+document.getElementById("circles").textContent = circles
+
+document.getElementById("moreCirclesCost").textContent = moreCirclesCost
 
 document.getElementById("evenMoreCirclesCost").textContent = evenMoreCirclesCost
 }
