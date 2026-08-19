@@ -6,7 +6,6 @@ let evenMoreCirclesCost = 100
 let evenMoreCirclesMulti = 1
 let evenEvenMoreCirclesCost = 10000
 let evenEvenMoreCirclesExponent = 1
-
 let earnCirclesAutomaticallyCost = 1337
 let earnCirclesAutomaticallyLevel = 0
 
@@ -83,7 +82,7 @@ function earnCirclesAutomatically() {
 
 function passiveIncome() {
     circlesPerSecond =
-        circlesPerClick * 0.01 * earnCirclesAutomaticallyLevel
+        (circlesPerClick ** evenEvenMoreCirclesExponent * evenMoreCirclesMulti) * 0.01 * earnCirclesAutomaticallyLevel
 
     circles += circlesPerSecond * 0.25
 
