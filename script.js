@@ -74,7 +74,7 @@ function earnCirclesAutomatically() {
     if (circles >= earnCirclesAutomaticallyCost) {
         circles -= earnCirclesAutomaticallyCost
         earnCirclesAutomaticallyLevel += 1
-        earnCirclesAutomaticallyCost *= 5
+        earnCirclesAutomaticallyCost *= 10
         updateCircles()
         saveGame()
     }
