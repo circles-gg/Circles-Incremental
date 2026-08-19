@@ -67,10 +67,10 @@ function evenEvenMoreCircles() {
 
 function saveGame() {
 localStorage.setItem("circles", circles)
-    localStorage.setItem("circlesPerClick", circlesPerClick)
+ localStorage.setItem("circlesPerClick", circlesPerClick)
 
 localStorage.setItem("moreCirclesCost", moreCirclesCost)
-    localStorage.setItem("evenMoreCirclesCost", evenMoreCirclesCost)
+ localStorage.setItem("evenMoreCirclesCost", evenMoreCirclesCost)
 
 localStorage.setItem("evenMoreCirclesMulti", evenMoreCirclesMulti)
 
