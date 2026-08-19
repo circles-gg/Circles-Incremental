@@ -86,8 +86,8 @@ circlesPerClick = Number(localStorage.getItem("circlesPerClick")) || 1
 moreCirclesCost = Number(localStorage.getItem("moreCirclesCost")) || 5
 evenMoreCirclesCost = Number(localStorage.getItem("evenMoreCirclesCost")) || 100
 evenMoreCirclesMulti = Number(localStorage.getItem("evenMoreCirclesMulti")) || 1
-Number(localStorage.getItem("evenEvenMoreCirclesCost")) || 10000
-Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1
+evenEvenMoreCirclesCost = Number(localStorage.getItem("evenEvenMoreCirclesCost")) || 10000
+evenEvenMoreCirclesExponent = Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1
 circlesShopUnlocked = localStorage.getItem("circlesShopUnlocked") === "true"
 
     updateCircles()
