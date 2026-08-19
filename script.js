@@ -4,6 +4,8 @@ let circlesPerSecond = 0
 let moreCirclesCost = 5
 let evenMoreCirclesCost = 100
 let evenMoreCirclesMulti = 1
+let evenEvenMoreCirclesCost = 10000
+let evenEvenMoreCirclesExponent = 1
 
 let circlesShopUnlocked = false
 
@@ -13,10 +15,12 @@ document.getElementById("circles").textContent = circles
 document.getElementById("moreCirclesCost").textContent = moreCirclesCost
 
 document.getElementById("evenMoreCirclesCost").textContent = evenMoreCirclesCost
+
+document.getElementById("evenEvenMoreCirclesCost").textContent = evenEvenMoreCirclesCost
 }
 
 function earnCircles() {
-    circles += circlesPerClick * evenMoreCirclesMulti
+    circles += circlesPerClick ** evenEvenMoreCirclesExponent * evenMoreCirclesMulti
     updateCircles()
     updateCirclesShop()
     saveGame()
@@ -51,15 +55,28 @@ function evenMoreCircles() {
     }
 }
 
+function evenEvenMoreCircles() {
+    if (circles >= evenEvenMoreCirclesCost) {
+        circles -= evenEvenMoreCirclesCost
+        evenEvenMoreCirclesExponent += 1
+        evenEvenMoreCirclesCost **= 2
+        updateCircles()
+        saveGame()
+    }
+}
 
 function saveGame() {
 localStorage.setItem("circles", circles)
     localStorage.setItem("circlesPerClick", circlesPerClick)
+
+localStorage.setItem("moreCirclesCost", moreCirclesCost)
     localStorage.setItem("evenMoreCirclesCost", evenMoreCirclesCost)
 
 localStorage.setItem("evenMoreCirclesMulti", evenMoreCirclesMulti)
 
-localStorage.setItem("moreCirclesCost", moreCirclesCost)
+localStorage.setItem("evenEvenMoreCirclesCost", evenEvenMoreCirclesCost)
+
+localStorage.setItem("evenEvenMoreCirclesExponent", evenEvenMoreCirclesExponent)
  localStorage.setItem("circlesShopUnlocked", circlesShopUnlocked)
 }
 
@@ -69,6 +86,8 @@ circlesPerClick = Number(localStorage.getItem("circlesPerClick")) || 1
 moreCirclesCost = Number(localStorage.getItem("moreCirclesCost")) || 5
 evenMoreCirclesCost = Number(localStorage.getItem("evenMoreCirclesCost")) || 100
 evenMoreCirclesMulti = Number(localStorage.getItem("evenMoreCirclesMulti")) || 1
+Number(localStorage.getItem("evenEvenMoreCirclesCost")) || 10000
+Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1
 circlesShopUnlocked = localStorage.getItem("circlesShopUnlocked") === "true"
 
     updateCircles()
