@@ -1,3 +1,4 @@
 # Circles-Incremental
 An **incremental web game** made by **CirclesNET**.
-(Will be playable soon.)
+
+**Current version:** v1.0 In-dev
