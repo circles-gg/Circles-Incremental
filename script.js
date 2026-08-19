@@ -82,7 +82,7 @@ function earnCirclesAutomatically() {
 
 function passiveIncome() {
     circlesPerSecond =
-        (circlesPerClick ** evenEvenMoreCirclesExponent * evenMoreCirclesMulti) * 0.01 * earnCirclesAutomaticallyLevel
+        circlesPerClick ** evenEvenMoreCirclesExponent * evenMoreCirclesMulti * 0.01 * earnCirclesAutomaticallyLevel
 
     circles += circlesPerSecond * 0.25
 
