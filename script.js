@@ -7,8 +7,10 @@ let circlesPerClick = 1
 let circlesPerSecond = 0
 
 let moreCirclesCost = 5
+
 let evenMoreCirclesCost = 100
 let evenMoreCirclesMulti = 1
+
 let evenEvenMoreCirclesCost = 10000
 let evenEvenMoreCirclesExponent = 1
 
@@ -34,7 +36,7 @@ const MILESTONE_MULTIPLIERS = [
 
 
 // ====================
-// Calculations
+// Production
 // ====================
 
 function getRockMultiplier() {
@@ -47,14 +49,17 @@ function getRockMultiplier() {
     return multiplier
 }
 
-function getEffectiveCirclesPerClick() {
-    return circlesPerClick * getRockMultiplier()
+function getClickProduction() {
+    return (
+        circlesPerClick ** evenEvenMoreCirclesExponent *
+        evenMoreCirclesMulti *
+        getRockMultiplier()
+    )
 }
 
 function getCirclesPerSecond() {
     return (
-        getEffectiveCirclesPerClick() ** evenEvenMoreCirclesExponent *
-        evenMoreCirclesMulti *
+        getClickProduction() *
         earnCirclesAutomaticallyLevel
     )
 }
@@ -105,10 +110,7 @@ function updateRockMilestones() {
 // ====================
 
 function earnCircles() {
-    circles +=
-        getEffectiveCirclesPerClick() **
-        evenEvenMoreCirclesExponent *
-        evenMoreCirclesMulti
+    circles += getClickProduction()
 
     updateUI()
     saveGame()
