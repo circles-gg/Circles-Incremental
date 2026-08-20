@@ -15,6 +15,18 @@ let rocks = 0
 
 let circlesShopUnlocked = false
 
+function getRockMultiplier() {
+    if (rocks >= 2) {
+        return 4
+    }
+
+    if (rocks >= 1) {
+        return 2
+    }
+
+    return 1
+}
+
 function updateCircles() {
     document.getElementById("circles").textContent = circles
 
@@ -33,16 +45,18 @@ function updateCircles() {
     document.getElementById("rocks").textContent = rocks
 }
 
-function getRockMultiplier() {
-    if (rocks >= 2) {
-        return 4
+function updateCirclesShop() {
+    if (circles >= 5) {
+        circlesShopUnlocked = true
     }
 
-    if (rocks >= 1) {
-        return 2
-    }
+    document.getElementById("circlesShop").style.display =
+        circlesShopUnlocked ? "block" : "none"
+}
 
-    return 1
+function updateRockMilestones() {
+    document.getElementById("rockMilestones").style.display =
+        rocks >= 1 ? "block" : "none"
 }
 
 function earnCircles() {
@@ -54,15 +68,6 @@ function earnCircles() {
     updateCircles()
     updateCirclesShop()
     saveGame()
-}
-
-function updateCirclesShop() {
-    if (circles >= 5) {
-        circlesShopUnlocked = true
-    }
-
-    document.getElementById("circlesShop").style.display =
-        circlesShopUnlocked ? "block" : "none"
 }
 
 function moreCircles() {
@@ -145,6 +150,8 @@ function rockReset() {
 
     updateCircles()
     updateCirclesShop()
+    updateRockMilestones()
+
     saveGame()
 }
 
@@ -228,6 +235,7 @@ function loadGame() {
 
     updateCircles()
     updateCirclesShop()
+    updateRockMilestones()
 }
 
 loadGame()
