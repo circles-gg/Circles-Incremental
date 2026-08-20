@@ -217,24 +217,48 @@ function passiveIncome() {
 // Save / Load
 // ====================
 
-const SAVE_KEYS = [
-    "circles",
-    "circlesPerClick",
-    "moreCirclesCost",
-    "evenMoreCirclesCost",
-    "evenMoreCirclesMulti",
-    "evenEvenMoreCirclesCost",
-    "evenEvenMoreCirclesExponent",
-    "earnCirclesAutomaticallyCost",
-    "earnCirclesAutomaticallyLevel",
-    "rocks",
-    "circlesShopUnlocked"
-]
-
 function saveGame() {
-    SAVE_KEYS.forEach(key => {
-        localStorage.setItem(key, window[key])
-    })
+    localStorage.setItem("circles", circles)
+    localStorage.setItem("circlesPerClick", circlesPerClick)
+
+    localStorage.setItem("moreCirclesCost", moreCirclesCost)
+
+    localStorage.setItem(
+        "evenMoreCirclesCost",
+        evenMoreCirclesCost
+    )
+
+    localStorage.setItem(
+        "evenMoreCirclesMulti",
+        evenMoreCirclesMulti
+    )
+
+    localStorage.setItem(
+        "evenEvenMoreCirclesCost",
+        evenEvenMoreCirclesCost
+    )
+
+    localStorage.setItem(
+        "evenEvenMoreCirclesExponent",
+        evenEvenMoreCirclesExponent
+    )
+
+    localStorage.setItem(
+        "earnCirclesAutomaticallyCost",
+        earnCirclesAutomaticallyCost
+    )
+
+    localStorage.setItem(
+        "earnCirclesAutomaticallyLevel",
+        earnCirclesAutomaticallyLevel
+    )
+
+    localStorage.setItem("rocks", rocks)
+
+    localStorage.setItem(
+        "circlesShopUnlocked",
+        circlesShopUnlocked
+    )
 }
 
 function loadGame() {
