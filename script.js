@@ -207,7 +207,7 @@ function rockReset() {
 function passiveIncome() {
     circlesPerSecond = getCirclesPerSecond()
 
-    circles += circlesPerSecond / 4
+    circles += circlesPerSecond
 
     updateUI()
 }
