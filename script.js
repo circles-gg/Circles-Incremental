@@ -29,19 +29,10 @@ function getRockMultiplier() {
 
 function updateCircles() {
     document.getElementById("circles").textContent = circles
-
-    document.getElementById("moreCirclesCost").textContent =
-        moreCirclesCost
-
-    document.getElementById("evenMoreCirclesCost").textContent =
-        evenMoreCirclesCost
-
-    document.getElementById("evenEvenMoreCirclesCost").textContent =
-        evenEvenMoreCirclesCost
-
-    document.getElementById("earnCirclesAutomaticallyCost").textContent =
-        earnCirclesAutomaticallyCost
-
+    document.getElementById("moreCirclesCost").textContent = moreCirclesCost
+    document.getElementById("evenMoreCirclesCost").textContent = evenMoreCirclesCost
+    document.getElementById("evenEvenMoreCirclesCost").textContent = evenEvenMoreCirclesCost
+    document.getElementById("earnCirclesAutomaticallyCost").textContent = earnCirclesAutomaticallyCost
     document.getElementById("rocks").textContent = rocks
 }
 
@@ -158,78 +149,28 @@ function rockReset() {
 function saveGame() {
     localStorage.setItem("circles", circles)
     localStorage.setItem("circlesPerClick", circlesPerClick)
-
     localStorage.setItem("moreCirclesCost", moreCirclesCost)
-
-    localStorage.setItem(
-        "evenMoreCirclesCost",
-        evenMoreCirclesCost
-    )
-
-    localStorage.setItem(
-        "evenMoreCirclesMulti",
-        evenMoreCirclesMulti
-    )
-
-    localStorage.setItem(
-        "evenEvenMoreCirclesCost",
-        evenEvenMoreCirclesCost
-    )
-
-    localStorage.setItem(
-        "evenEvenMoreCirclesExponent",
-        evenEvenMoreCirclesExponent
-    )
-
-    localStorage.setItem(
-        "earnCirclesAutomaticallyCost",
-        earnCirclesAutomaticallyCost
-    )
-
-    localStorage.setItem(
-        "earnCirclesAutomaticallyLevel",
-        earnCirclesAutomaticallyLevel
-    )
-
+    localStorage.setItem("evenMoreCirclesCost", evenMoreCirclesCost)
+    localStorage.setItem("evenMoreCirclesMulti", evenMoreCirclesMulti)
+    localStorage.setItem("evenEvenMoreCirclesCost", evenEvenMoreCirclesCost)
+    localStorage.setItem("evenEvenMoreCirclesExponent", evenEvenMoreCirclesExponent)
+    localStorage.setItem("earnCirclesAutomaticallyCost", earnCirclesAutomaticallyCost)
+    localStorage.setItem("earnCirclesAutomaticallyLevel", earnCirclesAutomaticallyLevel)
     localStorage.setItem("rocks", rocks)
-
-    localStorage.setItem(
-        "circlesShopUnlocked",
-        circlesShopUnlocked
-    )
+    localStorage.setItem("circlesShopUnlocked", circlesShopUnlocked)
 }
 
 function loadGame() {
-    circles =
-        Number(localStorage.getItem("circles")) || 0
-
-    circlesPerClick =
-        Number(localStorage.getItem("circlesPerClick")) || 1
-
-    moreCirclesCost =
-        Number(localStorage.getItem("moreCirclesCost")) || 5
-
-    evenMoreCirclesCost =
-        Number(localStorage.getItem("evenMoreCirclesCost")) || 100
-
-    evenMoreCirclesMulti =
-        Number(localStorage.getItem("evenMoreCirclesMulti")) || 1
-
-    evenEvenMoreCirclesCost =
-        Number(localStorage.getItem("evenEvenMoreCirclesCost")) || 10000
-
-    evenEvenMoreCirclesExponent =
-        Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1
-
-    earnCirclesAutomaticallyCost =
-        Number(localStorage.getItem("earnCirclesAutomaticallyCost")) || 1337
-
-    earnCirclesAutomaticallyLevel =
-        Number(localStorage.getItem("earnCirclesAutomaticallyLevel")) || 0
-
-    rocks =
-        Number(localStorage.getItem("rocks")) || 0
-
+    circles = Number(localStorage.getItem("circles")) || 0
+    circlesPerClick = Number(localStorage.getItem("circlesPerClick")) || 1
+    moreCirclesCost = Number(localStorage.getItem("moreCirclesCost")) || 5
+    evenMoreCirclesCost = Number(localStorage.getItem("evenMoreCirclesCost")) || 100
+    evenMoreCirclesMulti = Number(localStorage.getItem("evenMoreCirclesMulti")) || 1
+    evenEvenMoreCirclesCost = Number(localStorage.getItem("evenEvenMoreCirclesCost")) || 10000
+    evenEvenMoreCirclesExponent = Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1
+    earnCirclesAutomaticallyCost = Number(localStorage.getItem("earnCirclesAutomaticallyCost")) || 1337
+    earnCirclesAutomaticallyLevel = Number(localStorage.getItem("earnCirclesAutomaticallyLevel")) || 0
+    rocks = Number(localStorage.getItem("rocks")) || 0
     circlesShopUnlocked =
         localStorage.getItem("circlesShopUnlocked") === "true"
 
