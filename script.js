@@ -101,7 +101,9 @@ function updateCirclesShop() {
 
 function updateRockMilestones() {
     document.getElementById("rockMilestones").style.display =
-        rocks >= 1 ? "block" : "none"
+        circles >= ROCK_RESET_REQUIREMENT || rocks >= 1
+            ? "block"
+            : "none"
 }
 
 
