@@ -60,7 +60,7 @@ function getClickProduction() {
 function getCirclesPerSecond() {
     return (
         getClickProduction() *
-        earnCirclesAutomaticallyLevel
+        earnCirclesAutomaticallyLevel * 4
     )
 }
 
@@ -305,6 +305,6 @@ function loadGame() {
 
 loadGame()
 
-setInterval(passiveIncome, 250)
+setInterval(passiveIncome, 1000)
 
 setInterval(saveGame, 5000)
