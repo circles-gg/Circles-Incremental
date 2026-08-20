@@ -60,7 +60,7 @@ function getClickProduction() {
 function getCirclesPerSecond() {
     return (
         getClickProduction() *
-        earnCirclesAutomaticallyLevel * 4
+        earnCirclesAutomaticallyLevel
     )
 }
 
