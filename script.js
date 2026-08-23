@@ -2,174 +2,185 @@
 // Game State
 // ====================
 
-let circles = 0
-let circlesPerClick = 1
-let circlesPerSecond = 0
+let circles = 0;
 
-let moreCirclesCost = 5
+let circlesPerClick = 1;
+let circlesPerSecond = 0;
 
-let evenMoreCirclesCost = 100
-let evenMoreCirclesMulti = 1
+let moreCirclesLevel = 0;
 
-let evenEvenMoreCirclesCost = 10000
-let evenEvenMoreCirclesExponent = 1
+let evenMoreCirclesLevel = 0;
+let evenMoreCirclesMulti = 1;
 
-let earnCirclesAutomaticallyCost = 1337
-let earnCirclesAutomaticallyLevel = 0
+let evenEvenMoreCirclesLevel = 0;
+let evenEvenMoreCirclesExponent = 1;
 
-let rocks = 0
+let earnCirclesAutomaticallyLevel = 0;
 
-let circlesShopUnlocked = false
+let rocks = 0;
 
+let circlesShopUnlocked = false;
 
 // ====================
 // Constants
 // ====================
 
-const ROCK_RESET_REQUIREMENT = 1000000
+const ROCK_RESET_REQUIREMENT = 1000000;
 
-const MILESTONE_MULTIPLIERS = [
-    1,
-    2,
-    4
-]
+const MORE_CIRCLES_BASE_COST = 5;
+const MORE_CIRCLES_COST_MULTIPLIER = 2;
 
+const EVEN_MORE_CIRCLES_BASE_COST = 100;
+const EVEN_MORE_CIRCLES_COST_MULTIPLIER = 4;
+
+const EVEN_EVEN_MORE_CIRCLES_BASE_COST = 10000;
+
+const AUTOMATIC_CIRCLES_BASE_COST = 1337;
+
+const AUTOMATIC_CIRCLES_COST_MULTIPLIER = 10;
+
+const MILESTONE_MULTIPLIERS = [1, 2, 4];
+
+// ====================
+// Cost Calculations
+// ====================
+
+function getMoreCirclesCost() {
+    return MORE_CIRCLES_BASE_COST * MORE_CIRCLES_COST_MULTIPLIER ** moreCirclesLevel;
+}
+
+function getEvenMoreCirclesCost() {
+    return EVEN_MORE_CIRCLES_BASE_COST * EVEN_MORE_CIRCLES_COST_MULTIPLIER ** evenMoreCirclesLevel;
+}
+
+function getEvenEvenMoreCirclesCost() {
+    return EVEN_EVEN_MORE_CIRCLES_BASE_COST ** 2 ** evenEvenMoreCirclesLevel;
+}
+
+function getEarnCirclesAutomaticallyCost() {
+    return AUTOMATIC_CIRCLES_BASE_COST * AUTOMATIC_CIRCLES_COST_MULTIPLIER ** earnCirclesAutomaticallyLevel;
+}
 
 // ====================
 // Production
 // ====================
 
 function getRockMultiplier() {
-    let multiplier = 1
+    let multiplier = 1;
 
     for (let i = 1; i <= rocks; i++) {
-        multiplier *= MILESTONE_MULTIPLIERS[i] || 1
+        multiplier *= MILESTONE_MULTIPLIERS[i] || 1;
     }
 
-    return multiplier
+    return multiplier;
 }
 
 function getClickProduction() {
-    return (
-        circlesPerClick ** evenEvenMoreCirclesExponent *
-        evenMoreCirclesMulti *
-        getRockMultiplier()
-    )
+    return circlesPerClick ** evenEvenMoreCirclesExponent * evenMoreCirclesMulti * getRockMultiplier();
 }
 
 function getCirclesPerSecond() {
-    return (
-        getClickProduction() *
-        earnCirclesAutomaticallyLevel
-    )
+    return getClickProduction() * earnCirclesAutomaticallyLevel;
 }
-
 
 // ====================
 // UI
 // ====================
 
 function updateUI() {
-    document.getElementById("circles").textContent = circles
+    document.getElementById("circles").textContent = circles;
+    document.getElementById("moreCirclesCost").textContent = getMoreCirclesCost();
+    document.getElementById("evenMoreCirclesCost").textContent = getEvenMoreCirclesCost();
+    document.getElementById("evenEvenMoreCirclesCost").textContent = getEvenEvenMoreCirclesCost();
+    document.getElementById("earnCirclesAutomaticallyCost").textContent = getEarnCirclesAutomaticallyCost();
+    document.getElementById("rocks").textContent = rocks;
 
-    document.getElementById("moreCirclesCost").textContent =
-        moreCirclesCost
-
-    document.getElementById("evenMoreCirclesCost").textContent =
-        evenMoreCirclesCost
-
-    document.getElementById("evenEvenMoreCirclesCost").textContent =
-        evenEvenMoreCirclesCost
-
-    document.getElementById("earnCirclesAutomaticallyCost").textContent =
-        earnCirclesAutomaticallyCost
-
-    document.getElementById("rocks").textContent = rocks
-
-    updateCirclesShop()
-    updateRockMilestones()
+    updateCirclesShop();
+    updateRockMilestones();
 }
 
 function updateCirclesShop() {
     if (circles >= 5) {
-        circlesShopUnlocked = true
+        circlesShopUnlocked = true;
     }
 
-    document.getElementById("circlesShop").style.display =
-        circlesShopUnlocked ? "block" : "none"
+    document.getElementById("circlesShop").style.display = circlesShopUnlocked ? "block" : "none";
 }
 
 function updateRockMilestones() {
     document.getElementById("rockMilestones").style.display =
-        circles >= ROCK_RESET_REQUIREMENT || rocks >= 1
-            ? "block"
-            : "none"
+        circles >= ROCK_RESET_REQUIREMENT || rocks >= 1 ? "block" : "none";
 }
-
 
 // ====================
 // Layer 0
 // ====================
 
 function earnCircles() {
-    circles += getClickProduction()
+    circles += getClickProduction();
 
-    updateUI()
-    saveGame()
+    updateUI();
+    saveGame();
 }
 
 function moreCircles() {
-    if (circles < moreCirclesCost) {
-        return
+    const cost = getMoreCirclesCost();
+
+    if (circles < cost) {
+        return;
     }
 
-    circles -= moreCirclesCost
-    circlesPerClick += 1
-    moreCirclesCost *= 2
+    circles -= cost;
+    circlesPerClick += 1;
+    moreCirclesLevel += 1;
 
-    updateUI()
-    saveGame()
+    updateUI();
+    saveGame();
 }
 
 function evenMoreCircles() {
-    if (circles < evenMoreCirclesCost) {
-        return
+    const cost = getEvenMoreCirclesCost();
+
+    if (circles < cost) {
+        return;
     }
 
-    circles -= evenMoreCirclesCost
-    evenMoreCirclesMulti += 1
-    evenMoreCirclesCost *= 2
+    circles -= cost;
+    evenMoreCirclesMulti += 1;
+    evenMoreCirclesLevel += 1;
 
-    updateUI()
-    saveGame()
+    updateUI();
+    saveGame();
 }
 
 function evenEvenMoreCircles() {
-    if (circles < evenEvenMoreCirclesCost) {
-        return
+    const cost = getEvenEvenMoreCirclesCost();
+
+    if (circles < cost) {
+        return;
     }
 
-    circles -= evenEvenMoreCirclesCost
-    evenEvenMoreCirclesExponent += 1
-    evenEvenMoreCirclesCost **= 2
+    circles -= cost;
+    evenEvenMoreCirclesExponent += 1;
+    evenEvenMoreCirclesLevel += 1;
 
-    updateUI()
-    saveGame()
+    updateUI();
+    saveGame();
 }
 
 function earnCirclesAutomatically() {
-    if (circles < earnCirclesAutomaticallyCost) {
-        return
+    const cost = getEarnCirclesAutomaticallyCost();
+
+    if (circles < cost) {
+        return;
     }
 
-    circles -= earnCirclesAutomaticallyCost
-    earnCirclesAutomaticallyLevel += 1
-    earnCirclesAutomaticallyCost *= 10
+    circles -= cost;
+    earnCirclesAutomaticallyLevel += 1;
 
-    updateUI()
-    saveGame()
+    updateUI();
+    saveGame();
 }
-
 
 // ====================
 // Layer 1
@@ -177,134 +188,77 @@ function earnCirclesAutomatically() {
 
 function rockReset() {
     if (circles < ROCK_RESET_REQUIREMENT) {
-        return
+        return;
     }
 
-    rocks += 1
+    rocks += 1;
 
-    circles = 0
-    circlesPerClick = 1
+    circles = 0;
 
-    moreCirclesCost = 5
+    circlesPerClick = 1;
+    moreCirclesLevel = 0;
 
-    evenMoreCirclesCost = 100
-    evenMoreCirclesMulti = 1
+    evenMoreCirclesLevel = 0;
+    evenMoreCirclesMulti = 1;
 
-    evenEvenMoreCirclesCost = 10000
-    evenEvenMoreCirclesExponent = 1
+    evenEvenMoreCirclesLevel = 0;
+    evenEvenMoreCirclesExponent = 1;
 
-    circlesShopUnlocked = false
+    circlesShopUnlocked = false;
 
-    updateUI()
-    saveGame()
+    updateUI();
+    saveGame();
 }
-
 
 // ====================
 // Passive Income
 // ====================
 
 function passiveIncome() {
-    circlesPerSecond = getCirclesPerSecond()
+    circlesPerSecond = getCirclesPerSecond();
 
-    circles += circlesPerSecond
+    circles += circlesPerSecond;
 
-    updateUI()
+    updateUI();
 }
-
 
 // ====================
 // Save / Load
 // ====================
 
 function saveGame() {
-    localStorage.setItem("circles", circles)
-    localStorage.setItem("circlesPerClick", circlesPerClick)
-
-    localStorage.setItem("moreCirclesCost", moreCirclesCost)
-
-    localStorage.setItem(
-        "evenMoreCirclesCost",
-        evenMoreCirclesCost
-    )
-
-    localStorage.setItem(
-        "evenMoreCirclesMulti",
-        evenMoreCirclesMulti
-    )
-
-    localStorage.setItem(
-        "evenEvenMoreCirclesCost",
-        evenEvenMoreCirclesCost
-    )
-
-    localStorage.setItem(
-        "evenEvenMoreCirclesExponent",
-        evenEvenMoreCirclesExponent
-    )
-
-    localStorage.setItem(
-        "earnCirclesAutomaticallyCost",
-        earnCirclesAutomaticallyCost
-    )
-
-    localStorage.setItem(
-        "earnCirclesAutomaticallyLevel",
-        earnCirclesAutomaticallyLevel
-    )
-
-    localStorage.setItem("rocks", rocks)
-
-    localStorage.setItem(
-        "circlesShopUnlocked",
-        circlesShopUnlocked
-    )
+    localStorage.setItem("circles", circles);
+    localStorage.setItem("circlesPerClick", circlesPerClick);
+    localStorage.setItem("moreCirclesLevel", moreCirclesLevel);
+    localStorage.setItem("evenMoreCirclesLevel", evenMoreCirclesLevel);
+    localStorage.setItem("evenMoreCirclesMulti", evenMoreCirclesMulti);
+    localStorage.setItem("evenEvenMoreCirclesLevel", evenEvenMoreCirclesLevel);
+    localStorage.setItem("evenEvenMoreCirclesExponent", evenEvenMoreCirclesExponent);
+    localStorage.setItem("earnCirclesAutomaticallyLevel", earnCirclesAutomaticallyLevel);
+    localStorage.setItem("rocks", rocks);
+    localStorage.setItem("circlesShopUnlocked", circlesShopUnlocked);
 }
 
 function loadGame() {
-    circles =
-        Number(localStorage.getItem("circles")) || 0
+    circles = Number(localStorage.getItem("circles")) || 0;
+    circlesPerClick = Number(localStorage.getItem("circlesPerClick")) || 1;
+    moreCirclesLevel = Number(localStorage.getItem("moreCirclesLevel")) || 0;
+    evenMoreCirclesLevel = Number(localStorage.getItem("evenMoreCirclesLevel")) || 0;
+    evenMoreCirclesMulti = Number(localStorage.getItem("evenMoreCirclesMulti")) || 1;
+    evenEvenMoreCirclesLevel = Number(localStorage.getItem("evenEvenMoreCirclesLevel")) || 0;
+    evenEvenMoreCirclesExponent = Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1;
+    earnCirclesAutomaticallyLevel = Number(localStorage.getItem("earnCirclesAutomaticallyLevel")) || 0;
+    rocks = Number(localStorage.getItem("rocks")) || 0;
+    circlesShopUnlocked = localStorage.getItem("circlesShopUnlocked") === "true";
 
-    circlesPerClick =
-        Number(localStorage.getItem("circlesPerClick")) || 1
-
-    moreCirclesCost =
-        Number(localStorage.getItem("moreCirclesCost")) || 5
-
-    evenMoreCirclesCost =
-        Number(localStorage.getItem("evenMoreCirclesCost")) || 100
-
-    evenMoreCirclesMulti =
-        Number(localStorage.getItem("evenMoreCirclesMulti")) || 1
-
-    evenEvenMoreCirclesCost =
-        Number(localStorage.getItem("evenEvenMoreCirclesCost")) || 10000
-
-    evenEvenMoreCirclesExponent =
-        Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1
-
-    earnCirclesAutomaticallyCost =
-        Number(localStorage.getItem("earnCirclesAutomaticallyCost")) || 1337
-
-    earnCirclesAutomaticallyLevel =
-        Number(localStorage.getItem("earnCirclesAutomaticallyLevel")) || 0
-
-    rocks =
-        Number(localStorage.getItem("rocks")) || 0
-
-    circlesShopUnlocked =
-        localStorage.getItem("circlesShopUnlocked") === "true"
-
-    updateUI()
+    updateUI();
 }
-
 
 // ====================
 // Game Start
 // ====================
 
-loadGame()
+loadGame();
 
-setInterval(passiveIncome, 1000)
-
-setInterval(saveGame, 5000)
+setInterval(passiveIncome, 1000);
+setInterval(saveGame, 5000);
