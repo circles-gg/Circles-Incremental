@@ -39,7 +39,8 @@ const AUTOMATIC_CIRCLES_BASE_COST = 1337;
 
 const AUTOMATIC_CIRCLES_COST_MULTIPLIER = 10;
 
-const MILESTONE_MULTIPLIERS = [1, 2, 4];
+const MILESTONE_REQUIREMENTS = [0, 1, 2, 5]
+const MILESTONE_MULTIPLIERS = [1, 2, 4, 8]
 
 // ====================
 // Cost Calculations
@@ -66,15 +67,16 @@ function getEarnCirclesAutomaticallyCost() {
 // ====================
 
 function getRockMultiplier() {
-    let multiplier = 1;
+    let multiplier = 1
 
-    for (let i = 1; i <= rocks; i++) {
-        multiplier *= MILESTONE_MULTIPLIERS[i] || 1;
+    for (let i = 1; i < MILESTONE_REQUIREMENTS.length; i++) {
+        if (rocks >= MILESTONE_REQUIREMENTS[i]) {
+            multiplier *= MILESTONE_MULTIPLIERS[i]
+        }
     }
 
-    return multiplier;
+    return multiplier
 }
-
 function getClickProduction() {
     return circlesPerClick ** evenEvenMoreCirclesExponent * evenMoreCirclesMulti * getRockMultiplier();
 }
