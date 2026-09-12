@@ -113,6 +113,12 @@ function updateUI() {
     document.getElementById("earnCirclesAutomaticallyCost").textContent = getEarnCirclesAutomaticallyCost();
     document.getElementById("rocks").textContent = rocks;
 
+document.getElementById("RT2048Multi").textContent = RT2048Multi;
+
+document.getElementById("addMoreBoosterCost").textContent = getBoosterCost();
+
+document.getElementById("RoadTo2048").style.display = boosters >= 1 || rocks >= ADD_MORE_BOOSTER_BASE_COST ? "block" : "none";
+
     updateCirclesShop();
     updateRockMilestones();
 }
@@ -126,13 +132,8 @@ function updateCirclesShop() {
 }
 
 function updateRockMilestones() {
-    document.getElementById("rockMilestones").style.display =
-        circles >= ROCK_RESET_REQUIREMENT || rocks >= 1 ? "block" : "none";
+document.getElementById("rockMilestones").style.display = circles >= ROCK_RESET_REQUIREMENT || rocks >= 1 ? "block" : "none";
 }
-
-document.getElementById("RT2048Multi").textContent = RT2048Multi;
-
-document.getElementById("addMoreBoosterCost").textContent = getBoosterCost();
 
 // ====================
 // Layer 0
