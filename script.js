@@ -19,6 +19,9 @@ let earnCirclesAutomaticallyLevel = 0;
 
 let rocks = 0;
 
+let boosters = 0
+let RT2048Multi = 1
+
 let circlesShopUnlocked = false;
 
 // ====================
@@ -26,6 +29,10 @@ let circlesShopUnlocked = false;
 // ====================
 
 const ROCK_RESET_REQUIREMENT = 1000000;
+
+const ADD_MORE_BOOSTER_BASE_COST = 10
+const ADD_MORE_BOOSTER_COST_MULTIPLIER = 3
+const MAX_RT2048_MULTI = 2048;
 
 const MORE_CIRCLES_BASE_COST = 5;
 const MORE_CIRCLES_COST_MULTIPLIER = 2;
@@ -62,6 +69,14 @@ function getEarnCirclesAutomaticallyCost() {
     return AUTOMATIC_CIRCLES_BASE_COST * AUTOMATIC_CIRCLES_COST_MULTIPLIER ** earnCirclesAutomaticallyLevel;
 }
 
+function getBoosterCost() {
+    if (RT2048Multi >= MAX_RT2048_MULTI) {
+        return Infinity;
+    }
+
+    return ADD_MORE_BOOSTER_BASE_COST * ADD_MORE_BOOSTER_COST_MULTIPLIER ** boosters;
+}
+
 // ====================
 // Production
 // ====================
@@ -77,6 +92,7 @@ function getRockMultiplier() {
 
     return multiplier
 }
+
 function getClickProduction() {
     return circlesPerClick ** evenEvenMoreCirclesExponent * evenMoreCirclesMulti * getRockMultiplier();
 }
@@ -96,6 +112,9 @@ function updateUI() {
     document.getElementById("evenEvenMoreCirclesCost").textContent = getEvenEvenMoreCirclesCost();
     document.getElementById("earnCirclesAutomaticallyCost").textContent = getEarnCirclesAutomaticallyCost();
     document.getElementById("rocks").textContent = rocks;
+    document.getElementById("RT2048Multi").textContent = RT2048Multi;
+    document.getElementById("addMoreBoosterCost").textContent = getBoosterCost();
+    document.getElementById("RoadTo2048").style.display = boosters >= 1 || rocks >= ADD_MORE_BOOSTER_BASE_COST ? "block" : "none";
 
     updateCirclesShop();
     updateRockMilestones();
@@ -110,8 +129,7 @@ function updateCirclesShop() {
 }
 
 function updateRockMilestones() {
-    document.getElementById("rockMilestones").style.display =
-        circles >= ROCK_RESET_REQUIREMENT || rocks >= 1 ? "block" : "none";
+document.getElementById("rockMilestones").style.display = circles >= ROCK_RESET_REQUIREMENT || rocks >= 1 ? "block" : "none";
 }
 
 // ====================
@@ -193,7 +211,37 @@ function rockReset() {
         return;
     }
 
-    rocks += 1;
+    rocks += 1 * RT2048Multi;
+
+    circles = 0;
+
+    circlesPerClick = 1;
+    moreCirclesLevel = 0;
+
+    evenMoreCirclesLevel = 0;
+    evenMoreCirclesMulti = 1;
+
+    evenEvenMoreCirclesLevel = 0;
+    evenEvenMoreCirclesExponent = 1;
+
+    circlesShopUnlocked = false;
+
+    updateUI();
+    saveGame();
+}
+
+// ====================
+// Layer 2
+// ====================
+
+function boosterReset() {
+    if (rocks < getBoosterCost()) {
+        return;
+    }
+
+    boosters += 1
+    RT2048Multi *= 2
+    rocks = 0
 
     circles = 0;
 
@@ -229,7 +277,7 @@ function passiveIncome() {
 // ====================
 
 function saveGame() {
-    localStorage.setItem("circles", circles);
+localStorage.setItem("circles", circles);
     localStorage.setItem("circlesPerClick", circlesPerClick);
     localStorage.setItem("moreCirclesLevel", moreCirclesLevel);
     localStorage.setItem("evenMoreCirclesLevel", evenMoreCirclesLevel);
@@ -237,7 +285,12 @@ function saveGame() {
     localStorage.setItem("evenEvenMoreCirclesLevel", evenEvenMoreCirclesLevel);
     localStorage.setItem("evenEvenMoreCirclesExponent", evenEvenMoreCirclesExponent);
     localStorage.setItem("earnCirclesAutomaticallyLevel", earnCirclesAutomaticallyLevel);
-    localStorage.setItem("rocks", rocks);
+
+localStorage.setItem("rocks", rocks);
+
+localStorage.setItem("boosters", boosters);
+
+localStorage.setItem("RT2048Multi", RT2048Multi);
     localStorage.setItem("circlesShopUnlocked", circlesShopUnlocked);
 }
 
@@ -251,6 +304,8 @@ function loadGame() {
     evenEvenMoreCirclesExponent = Number(localStorage.getItem("evenEvenMoreCirclesExponent")) || 1;
     earnCirclesAutomaticallyLevel = Number(localStorage.getItem("earnCirclesAutomaticallyLevel")) || 0;
     rocks = Number(localStorage.getItem("rocks")) || 0;
+    boosters = Number(localStorage.getItem("boosters")) || 0;
+    RT2048Multi = Number(localStorage.getItem("RT2048Multi")) || 1;
     circlesShopUnlocked = localStorage.getItem("circlesShopUnlocked") === "true";
 
     updateUI();
