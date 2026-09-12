@@ -112,12 +112,9 @@ function updateUI() {
     document.getElementById("evenEvenMoreCirclesCost").textContent = getEvenEvenMoreCirclesCost();
     document.getElementById("earnCirclesAutomaticallyCost").textContent = getEarnCirclesAutomaticallyCost();
     document.getElementById("rocks").textContent = rocks;
-
-document.getElementById("RT2048Multi").textContent = RT2048Multi;
-
-document.getElementById("addMoreBoosterCost").textContent = getBoosterCost();
-
-document.getElementById("RoadTo2048").style.display = boosters >= 1 || rocks >= ADD_MORE_BOOSTER_BASE_COST ? "block" : "none";
+    document.getElementById("RT2048Multi").textContent = RT2048Multi;
+    document.getElementById("addMoreBoosterCost").textContent = getBoosterCost();
+    document.getElementById("RoadTo2048").style.display = boosters >= 1 || rocks >= ADD_MORE_BOOSTER_BASE_COST ? "block" : "none";
 
     updateCirclesShop();
     updateRockMilestones();
